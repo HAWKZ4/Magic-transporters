@@ -25,11 +25,15 @@
 magic-movers/
 ├── src/
 │   ├── controllers/       # API logic
+│   ├── middlewares/       # Middlewares
 │   ├── models/            # Database schemas
 │   ├── routes/            # API routes
-│   ├── utils/             # Helper functions
+│   ├── utils/             # Helper functions	
 │   ├── server.ts          # App entry point
-├── .env                   # Environment variables
+├── Dockerfile             # Docker image instructions
+├── docker-compose.yaml    # Docker Compose configuration
+├── .dockerignore          # Ignored files for Docker builds
+├── .env.example           # Sample environment variables
 ├── README.md              # Project documentation
 ├── package.json           # Project metadata
 └── tsconfig.json          # TypeScript configuration
@@ -47,6 +51,78 @@ git clone https://github.com/HAWKZ4/magic-transporters.git
 cd magic-transporters
 
 ```
+
+----------
+
+## 🐳 Running with Docker
+
+Docker allows you to containerize the application for consistent environments. Follow these steps:
+
+### 1. Prepare Environment Variables
+
+-   Copy `.env.example` to `.env`:
+    
+    ```bash
+    cp .env.example .env
+    
+    ```
+    
+-   Update `.env` with your configuration:
+    
+    ```env
+    DATABASE_URI=mongodb://mongodb:27017/magictransporters
+    NODE_ENV=development
+    
+    ```
+    
+
+### 2. Build and Run the Application
+
+-   To build and start the services, use:
+    
+    ```bash
+    docker-compose up --build
+    
+    ```
+    
+-   The API will be accessible at:  
+    `http://localhost:8000`  
+    The MongoDB instance will run on:  
+    `mongodb://localhost:27017`
+
+### 3. Stop the Services
+
+-   To stop the services without deleting containers:
+    
+    ```bash
+    docker-compose stop
+    
+    ```
+    
+-   To remove containers, networks, and volumes:
+    
+    ```bash
+    docker-compose down
+    
+    ```
+    
+
+### 4. Persistent Storage
+
+-   Data will persist across container restarts due to the configured Docker volume (`mongo-data`).
+-   To reset the database, remove the `mongo-data` volume:
+    
+    ```bash
+    docker volume rm magic-movers_mongo-data
+    
+    ```
+    
+
+----------
+
+## 🚀 Running Without Docker
+
+If you prefer to run the application without Docker:
 
 ### Install Dependencies
 
@@ -66,11 +142,7 @@ DATABASE_URI=your_mongodb_uri
 
 ```
 
-----------
-
-## 🚀 Running the Application
-
-### Development Mode
+### Start the Application
 
 ```bash
 yarn dev
@@ -81,11 +153,11 @@ yarn dev
 
 ## 📚 API Documentation
 
-The API comes with live documentation powered by **Swagger**.
- Access it at:  
+The API comes with live documentation powered by **Swagger**.  
+Access it at:  
 `http://localhost:<PORT>/api-docs`
 
-### Available Endpoints:
+### Available Endpoints
 
 #### **Magic Movers**
 
@@ -123,7 +195,7 @@ GET
 
 `/api/magic-movers`
 
-List movers by completed missions.
+List movers by missions.
 
 DELETE
 
@@ -193,5 +265,7 @@ This project is licensed under the MIT License.
 
 ## 📝 Notes
 
--   Ensure MongoDB is running locally or provide a remote database URI in `.env`.
 -   Contributions are welcome. Fork the repo, make changes, and open a pull request!
+-   Using Docker ensures consistency across environments, making it the recommended way to run this project.
+
+----------

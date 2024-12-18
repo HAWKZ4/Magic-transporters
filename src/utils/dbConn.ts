@@ -16,6 +16,9 @@ async function connectDB(): Promise<void> {
   const dbURI = process.env.DATABASE_URI as string;
 
   try {
+    if(!dbURI){
+      throw new Error("Missing DB_URI in environment variables")
+    }
     const conn = await mongoose.connect(dbURI);
     console.log(`Database connected successfully ${conn?.connection?.host}`);
   } catch (err: unknown) {

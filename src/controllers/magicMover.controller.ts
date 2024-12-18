@@ -281,7 +281,7 @@ export async function endMission(req: Request, res: Response): Promise<void> {
  * @returns {Object[]} List of magic movers
  */
 export async function getMagicMovers(
-  req: Request,
+  _req: Request,
   res: Response
 ): Promise<void> {
   try {
@@ -451,7 +451,7 @@ export async function loadItems(req: Request, res: Response): Promise<void> {
  * @param {Object} res - The response object
  * @returns {Object} Message indicating the number of deleted movers
  */
-export async function clearMagicMovers(req: Request, res: Response) {
+export async function clearMagicMovers(_req: Request, res: Response) {
   try {
     const result = await MagicMover.deleteMany({});
 

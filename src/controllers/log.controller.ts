@@ -47,7 +47,7 @@ import Log from "../models/log.model";
  * getLogs(req,res)
  */
 
-export async function getLogs(req: Request, res: Response): Promise<void> {
+export async function getLogs(_req: Request, res: Response): Promise<void> {
   try {
     const Logs = await Log.find().sort({ timestamp: -1 }); // Fetch logs from the database and sort by timestamp
     if (Logs.length === 0) {
@@ -77,7 +77,7 @@ export async function getLogs(req: Request, res: Response): Promise<void> {
  * // returns 200 with the number of logs deleted
  * clear logs(req,res)
  */
-export async function clearLogs(req: Request, res: Response) {
+export async function clearLogs(_req: Request, res: Response) {
   try {
     const result = await Log.deleteMany({});
 

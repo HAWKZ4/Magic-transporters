@@ -44,7 +44,7 @@ export async function addMagicItem(req: Request, res: Response) {
  * getMagicItems(req, res);
  */
 export async function getMagicItems(
-  req: Request,
+  _req: Request,
   res: Response
 ): Promise<void> {
   try {
@@ -77,7 +77,7 @@ export async function getMagicItems(
  * // DELETE request to remove all magic items.
  * clearMagicItems(req, res);
  */
-export async function clearMagicItems(req: Request, res: Response) {
+export async function clearMagicItems(_req: Request, res: Response) {
   try {
     const result = await MagicItem.deleteMany({});
 
